@@ -352,7 +352,7 @@ class Captcher(Core):
                 if not result:  # Immediate kick
                     await self._kicker(user, "Failed the captcha. (Immediate kick)")
                     has_been_kicked = True
-            
+                await asyncio.sleep(5)
             if not captched and not has_been_kicked:
                 await self._kicker(user, "Failed the captcha.")
                 
