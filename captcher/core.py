@@ -616,9 +616,19 @@ class Core(commands.Cog):
         await asyncio.sleep(5)
         if not has_been_kicked and not success:
             await self._kicker(member, "Failed the captcha.")
-        await bot_message.delete()
-        await user_message.delete()
-        await final.delete()
+        try:        
+            await bot_message.delete()
+        except: # catch *all* exceptions
+            pass
+        try:
+            await user_message.delete()
+        except: # catch *all* exceptions
+            pass
+        try:
+            await final.delete()
+        except: # catch *all* exceptions
+            pass
+        del self.in_challenge[member.id]
         del self.in_challenge[member.id]
 
     @commands.Cog.listener()
